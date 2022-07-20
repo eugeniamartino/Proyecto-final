@@ -1,27 +1,34 @@
-const nombreAlumno = prompt("ingrese nombre del alumno");
-const alumno1 = [];
+class Alumno{
+   constructor(){
+      const nombreAlumno = prompt("ingrese nombre del alumno");
+      const notas = [];
 
-let numero = 0;
-do{
-   numero = parseInt(prompt("Ingrese nota del alumno. Cuando no tengas mas notas que cargar simplemente presiona cualquier tecla y dale enter"));
-   console.log(numero);
-   alumno1.push(numero);
-}while(parseInt(numero));
+      let numero = 0;
+      do{
+         numero = parseInt(prompt("Ingrese nota del alumno. Cuando no tengas mas notas que cargar simplemente presiona cualquier tecla y dale enter"));
+         console.log(numero);
+         notas.push(numero);
+      }while(parseInt(numero));
 
-alumno1.pop();
+      notas.pop();
 
-const sumatoria = alumno1.reduce((acumulador, elemento) => (acumulador + elemento) , 0)
-const notas = alumno1.length;
-const promedio = (sumatoria / notas);
+      const sumatoria = notas.reduce((acumulador, elemento) => (acumulador + elemento) , 0)
+      const notasTotales = notas.length;
+      const promedio = (sumatoria / notasTotales);
 
-console.log(alumno1)
-console.log(promedio)
+      console.log(notas)
+      console.log(promedio)
 
-if (promedio>=7){
-   document.write("Felicitaciones " + nombreAlumno + " tu nota final es un " + promedio);
-   console.log("Felicitaciones " + nombreAlumno + " tu nota final es un " + promedio )
+      if (promedio>=7){
+         document.write("Felicitaciones " + nombreAlumno + " tu nota final es un " + promedio);
+         console.log("Felicitaciones " + nombreAlumno + " tu nota final es un " + promedio )
+      }
+      else{
+         document.write("Lo lamento " + nombreAlumno + " tu nota final es un " + promedio )
+         console.log("Lo lamento " + nombreAlumno + " tu nota final es un " + promedio )
+      }
+
+   }
 }
-else{
-    document.write("Lo lamento " + nombreAlumno + " tu nota final es un " + promedio )
-    console.log("Lo lamento " + nombreAlumno + " tu nota final es un " + promedio )
-}
+
+const estudiante1 = new Alumno();
