@@ -32,3 +32,5 @@ class Alumno{
 }
 
 const estudiante1 = new Alumno();
+
+
