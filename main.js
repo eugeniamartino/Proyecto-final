@@ -12,6 +12,15 @@ class Alumno{
 
       notas.pop();
 
+      let sumarNota = prompt("Quiere sumar una nota mas?");
+
+      if(sumarNota == "si"){
+         numero = parseInt(prompt("Ingrese una nueva nota"));
+         console.log(numero);
+         notas.push(numero);
+      }
+   
+
       const sumatoria = notas.reduce((acumulador, elemento) => (acumulador + elemento) , 0)
       const notasTotales = notas.length;
       const promedio = (sumatoria / notasTotales);
@@ -29,8 +38,10 @@ class Alumno{
       }
 
    }
+
 }
 
 const estudiante1 = new Alumno();
+
 
 

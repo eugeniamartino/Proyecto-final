@@ -3,7 +3,7 @@ body{
 	font-family: "Poppins", sans-serif;
 }
 .navbar{
-	background:linear-gradient(60deg,#7b1fa2,#913f9e, 0.1);
+	background:linear-gradient(60deg,#7b1fa2,#913f9e);
 }
 
 .title{
@@ -73,4 +73,35 @@ hr{
 }
 .card-title{
 	color:rgba(255, 255, 255, 0.8);
+}
+.card-footer {
+	padding: 0.5rem 1rem;
+	background-color: rgba(0, 0, 0, 0.03);
+	border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.btn {
+	color: white;
+}
+
+@media screen and (max-width: 768px) {
+	span{
+		display:none;
+	}
+	.stat{
+	width:7rem;
+	height:7rem;
+	line-height:7rem;
+	font-size:3rem;
+	margin-left: -30px;
+}
+	.element-container{
+		padding:0;
+	}
+	hr{
+		width:100%;
+	}
+	.container{
+		margin-top:50px;
+	}
 }
