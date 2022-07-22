@@ -14,7 +14,7 @@ class Alumno{
 
       let sumarNota = prompt("Quiere sumar una nota mas?");
 
-      if(sumarNota == "si"){
+      if(sumarNota = "si"){
          numero = parseInt(prompt("Ingrese una nueva nota"));
          console.log(numero);
          notas.push(numero);
