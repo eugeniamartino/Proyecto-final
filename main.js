@@ -52,9 +52,11 @@ const alumnos =[
 
 
 
-function sumarNota(alumnos){
-   let numero = parseInt(prompt("Ingrese una nueva nota"));
-   alumnos.notas.push(numero);
+
+function sumarNota(notas){
+   const filtroNotas = alumnos.filter((alumno) => alumnos.nota === notas);
+   let numero = parseInt(prompt("Ingrese una nueva nota a"));
+   notas.push(numero);
 }
 
 let cards = "";
@@ -65,10 +67,10 @@ alumnos.forEach((alumno) => {
    <h2>${alumno.nombreAlumno}</h2>
    <p> EL alumno tiene un promedio de: ${alumno.promedio} de un total de: ${alumno.cantidad} de notas</p>
 
-   <button id="${idButton}">Sumar Nota</button>
+   <button id="${idButton}" onclick="sumarNota("notas")">Sumar Nota</button>
    </div>`; 
-    
-   })
+})
+
 
    alumnos.forEach((alumno) => {
       const idButton = `add-notas${alumno.id}`
