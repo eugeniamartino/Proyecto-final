@@ -1,6 +1,5 @@
 let alumnos =[
    {id:1, nombreAlumno: "Maria", notas: [8,7,9]},
-   {id:2, nombreAlumno: "Juan", notas: [5,7,4]},
 ]
 
 function llenarStorage(){
@@ -42,8 +41,6 @@ document.getElementById("seccion").innerHTML += `<div>
 <form>
 <input type=number id="inputInput"></input>
 <button onclick="notaM(al1.notas)">Sumar nota Maria</button>
-<input type=number id="inputInput"></input>
-<button onclick="notaJ(al1.notas)">Sumar nota Juan</button>
 
 </form>
 </div>`;
