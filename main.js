@@ -1,85 +1,60 @@
-/*class Alumno{
-   constructor(){
-      const nombreAlumno = prompt("ingrese nombre del alumno");
-      const notas = [];
-
-      let numero = 0;
-      do{
-         numero = parseInt(prompt("Ingrese nota del alumno. Cuando no tengas mas notas que cargar simplemente presiona cualquier tecla y dale enter"));
-         console.log(numero);
-         notas.push(numero);
-      }while(parseInt(numero));
-
-      notas.pop();
-
-      let sumarNota = prompt("Quiere sumar una nota mas?");
-
-      if(sumarNota = "si"){
-         numero = parseInt(prompt("Ingrese una nueva nota"));
-         console.log(numero);
-         notas.push(numero);
-      }
-   
-
-      const sumatoria = notas.reduce((acumulador, elemento) => (acumulador + elemento) , 0)
-      const notasTotales = notas.length;
-      const promedio = (sumatoria / notasTotales);
-
-      console.log(notas)
-      console.log(promedio)
-
-      if (promedio>=7){
-         document.write("Felicitaciones " + nombreAlumno + " tu nota final es un " + promedio);
-         console.log("Felicitaciones " + nombreAlumno + " tu nota final es un " + promedio )
-      }
-      else{
-         document.write("Lo lamento " + nombreAlumno + " tu nota final es un " + promedio )
-         console.log("Lo lamento " + nombreAlumno + " tu nota final es un " + promedio )
-      }
-
-   }
-
-}
-
-const estudiante1 = new Alumno();*/
-
-
-const alumnos =[
+let alumnos =[
    {id:1, nombreAlumno: "Maria", notas: [8,7,9]},
    {id:2, nombreAlumno: "Juan", notas: [5,7,4]},
-   {id:3, nombreAlumno: "Pablo", notas: [9,6,9]},
 ]
 
-function sumarNota(notas){
-   const filtroNotas = alumnos.filter((alumno) => alumnos.nota === notas);
-   let numero = parseInt(prompt("Ingrese una nueva nota a"));
-   notas.push(numero);
+function llenarStorage(){
+if (localStorage.getItem("estudiante1") === null){
+   alumnos.forEach((alumno) => {
+      localStorage.setItem("estudiante"+alumno.id, JSON.stringify(alumno));
+   })}
+else{
+   console.log(alumnos.length)
+}
 }
 
-let cards = "";
+llenarStorage()
 
 alumnos.forEach((alumno) => {
-   let sumatoria = alumno.notas.reduce((acumulador, elemento) => (acumulador + elemento) , 0)
-   let notasTotales = alumno.notas.length;
+   
+   const estudiante1 = JSON.parse(localStorage.getItem("estudiante1"));
+
+
+   let sumatoria = estudiante1.notas.reduce((acumulador, elemento) => (acumulador + elemento) , 0)
+   let notasTotales = estudiante1.notas.length;
    let promedio = (sumatoria / notasTotales);
 
-   const idButton = `add-notas${alumno.id}`
+   const idInput = `add-notas${alumno.id}`
+   
    document.getElementById("section-card").innerHTML += `<div class='card'>
    <h2>${alumno.nombreAlumno}</h2>
-   <p> EL alumno tiene un promedio de: ${promedio.toFixed(2)} de un total de: ${notasTotales} de notas</p>
+   <p> El alumno tiene un promedio de: ${promedio.toFixed(2)} de un total de: ${notasTotales} de notas</p>
 
-   <button id="${idButton}" onclick="sumarNota("notas")">Sumar Nota</button>
    </div>`; 
 
+
 })
 
-alumnos.forEach((alumno) => {
-   const idButton = `add-notas${alumno.id}`
-   document.getElementById(idButton).addEventListener("click", () => {
-      sumarNota(alumno.notas);
+let al1 = "";
+
+
+document.getElementById("seccion").innerHTML += `<div>
+<form>
+<input type=number id="inputInput"></input>
+<button onclick="notaM(al1.notas)">Sumar nota Maria</button>
+<input type=number id="inputInput"></input>
+<button onclick="notaJ(al1.notas)">Sumar nota Juan</button>
+
+</form>
+</div>`;
+
+function notaM(notas){
+   const estudiante1 = JSON.parse(localStorage.getItem("estudiante1"));
+   const result = alumnos.find((alumno) => alumno.id === 1);
+   let inputFinal = parseInt(document.getElementById("inputInput").value);
+   result.notas.push(inputFinal);
+   alumnos.forEach((alumno) => {
+      localStorage.setItem("estudiante"+alumno.id, JSON.stringify(alumno));
    })
-   
-})
+}
 
-
-//document.getElementById("section-card").innerHTML = cards; 
