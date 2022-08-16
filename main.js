@@ -28,8 +28,8 @@ alumnos.forEach((alumno) => {
    document.getElementById("section-card").innerHTML += `<div class='card'>
    <h2>${alumno.nombreAlumno}</h2>
    <p> El alumno tiene un promedio de: ${promedio.toFixed(2)} de un total de: ${notasTotales} de notas</p>
-
-   </div>`; 
+   <button onclick=>Sumar nota</button>
+   </div>`;  
 
 
 })
