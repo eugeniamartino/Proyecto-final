@@ -1,57 +1,57 @@
 let alumnos =[
    {id:1, nombreAlumno: "Maria", notas: [8,7,9]},
+   {id:2, nombreAlumno: "Juan", notas: [5,7,6]}
 ]
 
 function llenarStorage(){
-if (localStorage.getItem("estudiante1") === null){
-   alumnos.forEach((alumno) => {
-      localStorage.setItem("estudiante"+alumno.id, JSON.stringify(alumno));
-   })}
-else{
-   console.log(alumnos.length)
-}
+   if (localStorage.getItem("estudiante1") === null){
+      alumnos.forEach((alumno) => {
+         localStorage.setItem("estudiante"+alumno.id, JSON.stringify(alumno));
+      })}
+   else{
+      console.log(alumnos.length)
+   }
 }
 
 llenarStorage()
 
-alumnos.forEach((alumno) => {
-   
-   const estudiante1 = JSON.parse(localStorage.getItem("estudiante1"));
+let cards = "";
 
+alumnos.forEach((alumno) => {   
+   const estudiante = JSON.parse(localStorage.getItem("estudiante"+alumno.id));
 
-   let sumatoria = estudiante1.notas.reduce((acumulador, elemento) => (acumulador + elemento) , 0)
-   let notasTotales = estudiante1.notas.length;
+   let sumatoria = estudiante.notas.reduce((acumulador, elemento) => (acumulador + elemento), 0);
+   let notasTotales = estudiante.notas.length;
    let promedio = (sumatoria / notasTotales);
 
-   const idInput = `add-notas${alumno.id}`
-   
    document.getElementById("section-card").innerHTML += `<div class='card'>
    <h2>${alumno.nombreAlumno}</h2>
    <p> El alumno tiene un promedio de: ${promedio.toFixed(2)} de un total de: ${notasTotales} de notas</p>
-   <button onclick=>Sumar nota</button>
+   <button onclick="sumarNota(this.id)" id="${alumno.id}">Sumar nota</button>
    </div>`;  
-
 
 })
 
-let al1 = "";
 
+const nameAlumno = alumnos.find((alumno) => alumno.nombreAlumno);
 
-document.getElementById("seccion").innerHTML += `<div>
-<form>
-<input type=number id="inputInput"></input>
-<button onclick="notaM(al1.notas)">Sumar nota Maria</button>
+function sumarNota(clicked_id){
+   let nota = Swal.fire({
+   title: 'Sumar nota:',
+   input: 'number',
+   //inputLabel: nameAlumno,
+   showCancelButton: true,
 
-</form>
-</div>`;
+   }).then(input => nota = input).then((resultado)=> {
+      if (resultado.isConfirmed) {  
 
-function notaM(notas){
-   const estudiante1 = JSON.parse(localStorage.getItem("estudiante1"));
-   const result = alumnos.find((alumno) => alumno.id === 1);
-   let inputFinal = parseInt(document.getElementById("inputInput").value);
-   result.notas.push(inputFinal);
-   alumnos.forEach((alumno) => {
-      localStorage.setItem("estudiante"+alumno.id, JSON.stringify(alumno));
-   })
+         const result = alumnos.find((alumno) => alumno.id == clicked_id);
+         let notaFinal = parseInt(nota.value);
+         console.log(alumnos);
+         Swal.fire('Nota agregada! Actualiza la pagina para ver los resultados')
+         const estudiante = JSON.parse(localStorage.getItem("estudiante"+result.id));
+         estudiante.notas.push(notaFinal);
+         localStorage.setItem("estudiante"+result.id, JSON.stringify(estudiante));
+      }})
 }
 
