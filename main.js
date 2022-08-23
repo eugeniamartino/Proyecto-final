@@ -1,6 +1,8 @@
 let alumnos =[
    {id:1, nombreAlumno: "Maria", notas: [8,7,9]},
-   {id:2, nombreAlumno: "Juan", notas: [5,7,6]}
+   {id:2, nombreAlumno: "Juan", notas: [5,7,6]},
+   {id:3, nombreAlumno: "Pablo", notas: [5,9,9]},
+
 ]
 
 function llenarStorage(){

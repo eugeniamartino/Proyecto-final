@@ -2,6 +2,12 @@ body{
 	background:#171941;
 	font-family: "Poppins", sans-serif;
 }
+
+button{
+	font: cambria;
+	color: #171d7c
+}
+
 .navbar{
 	background:linear-gradient(60deg,#7b1fa2,#913f9e);
 	
@@ -26,6 +32,8 @@ body{
 	float: left;
 	margin-right: auto;
 	margin-left: auto;
+	padding: 5px;
+	border-radius: 5px;
 }
 
 @media screen and (max-width: 768px) {
