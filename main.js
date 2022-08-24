@@ -1,59 +1,67 @@
-let alumnos =[
-   {id:1, nombreAlumno: "Maria", notas: [8,7,9]},
-   {id:2, nombreAlumno: "Juan", notas: [5,7,6]},
-   {id:3, nombreAlumno: "Pablo", notas: [5,9,9]},
 
-]
+let url = 'https://jsonplaceholder.typicode.com/users/';
+fetch(url)
+   .then( response => response.json() )
+   .then( data => llenarStorage(data) )
+   .then( data => tarjetas(data) )
+   .then( data => agregar(data) )
 
-function llenarStorage(){
-   if (localStorage.getItem("estudiante1") === null){
-      alumnos.forEach((alumno) => {
-         localStorage.setItem("estudiante"+alumno.id, JSON.stringify(alumno));
-      })}
-   else{
-      console.log(alumnos.length)
-   }
-}
+   .catch( error => console.log(error) )
 
-llenarStorage()
 
-let cards = "";
-
-alumnos.forEach((alumno) => {   
-   const estudiante = JSON.parse(localStorage.getItem("estudiante"+alumno.id));
-
+function tarjetas(alumnos) {         
+   alumnos.forEach((alumno) => {   
+   let estudiante = JSON.parse(localStorage.getItem("estudiante"+alumno.id));
    let sumatoria = estudiante.notas.reduce((acumulador, elemento) => (acumulador + elemento), 0);
    let notasTotales = estudiante.notas.length;
    let promedio = (sumatoria / notasTotales);
-
+   
    document.getElementById("section-card").innerHTML += `<div class='card'>
-   <h2>${alumno.nombreAlumno}</h2>
-   <p> El alumno tiene un promedio de: ${promedio.toFixed(2)} de un total de: ${notasTotales} de notas</p>
-   <button onclick="sumarNota(this.id)" id="${alumno.id}">Sumar nota</button>
+   <h2>${estudiante.name}</h2>
+   <p> El alumno tiene un promedio de: ${promedio.toFixed(2)}</br>de un total de: ${notasTotales} de notas</p>
+
+   <button onclick="sumarNota(this.id)" id="${estudiante.id}">Sumar nota</button>
    </div>`;  
 
-})
+   })}
 
 
-const nameAlumno = alumnos.find((alumno) => alumno.nombreAlumno);
+function llenarStorage(alumnos){
+   if (localStorage.getItem("estudiante1") === null){
+      alumnos.forEach((alumno) => {
+         localStorage.setItem("estudiante"+alumno.id, JSON.stringify(alumno));
+         let estudiante = JSON.parse(localStorage.getItem("estudiante"+alumno.id));
+         estudiante.notas = [7];
+         localStorage.setItem("estudiante"+alumno.id, JSON.stringify(estudiante))
+      })
+
+      tarjetas(alumnos)
+   }
+   else{
+      console.log(alumnos.length)
+      tarjetas(alumnos)
+      }
+}
+
+let cards = "";
+
+//const nameAlumno = alumnos.find((alumno) => alumno.name);
+
 
 function sumarNota(clicked_id){
+
    let nota = Swal.fire({
    title: 'Sumar nota:',
    input: 'number',
    //inputLabel: nameAlumno,
    showCancelButton: true,
-
-   }).then(input => nota = input).then((resultado)=> {
+   }
+   ).then(input => nota = input).then((resultado)=> {
       if (resultado.isConfirmed) {  
-
-         const result = alumnos.find((alumno) => alumno.id == clicked_id);
          let notaFinal = parseInt(nota.value);
-         console.log(alumnos);
          Swal.fire('Nota agregada! Actualiza la pagina para ver los resultados')
-         const estudiante = JSON.parse(localStorage.getItem("estudiante"+result.id));
+         const estudiante = JSON.parse(localStorage.getItem("estudiante"+clicked_id));
          estudiante.notas.push(notaFinal);
-         localStorage.setItem("estudiante"+result.id, JSON.stringify(estudiante));
+         localStorage.setItem("estudiante"+clicked_id, JSON.stringify(estudiante));
       }})
 }
-
