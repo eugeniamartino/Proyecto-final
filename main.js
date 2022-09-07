@@ -98,8 +98,7 @@ function elegirClase(clicked_id){
    console.log(estudiante.clase);
    localStorage.setItem("estudiante"+clicked_id, JSON.stringify(estudiante));
 
-   document.getElementById('clase'+estudiante.id).innerHTML =`Cursando: ${estudiante.clase}`
-
+   ordenar("")
 })}
 
 
