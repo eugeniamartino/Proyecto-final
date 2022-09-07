@@ -53,7 +53,6 @@ function sumarNota(clicked_id){
    let nota = Swal.fire({
    title: 'Sumar nota:',
    input: 'number',
-   //inputLabel: nameAlumno,
    showCancelButton: true,
    }
    ).then(input => nota = input).then((resultado)=> {
